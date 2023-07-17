@@ -5,7 +5,6 @@ from __future__ import annotations
 from singer_sdk import Tap
 from singer_sdk import typing as th  # JSON schema typing helpers
 
-# TODO: Import your custom stream types here:
 from tap_fleetio import streams
 
 
@@ -14,14 +13,13 @@ class Tapfleetio(Tap):
 
     name = "tap-fleetio"
 
-    # TODO: Update this section with the actual config values you expect:
     config_jsonschema = th.PropertiesList(
         th.Property(
-            "auth_token",
+            "api_token",
             th.StringType,
             required=True,
             secret=True,  # Flag config as protected.
-            description="The token to authenticate against the API service",
+            description="The token to authenticate against the Fleetio API",
         ),
         th.Property(
             "account_token",
@@ -34,7 +32,7 @@ class Tapfleetio(Tap):
             "api_url",
             th.StringType,
             default="https://data-testing.preview.fleet.io/api",
-            description="The url for the API service",
+            description="Fleetio API base url",
         ),
     ).to_dict()
 

@@ -20,7 +20,6 @@ class fleetioStream(RESTStream):
     @property
     def url_base(self) -> str:
         """Return the API URL root, configurable via tap settings."""
-        # TODO: hardcode a value here, or retrieve it from self.config
         return "https://data-testing.preview.fleet.io/api"
 
     records_jsonpath = "$[*]"  # Or override `parse_response`.
@@ -38,7 +37,7 @@ class fleetioStream(RESTStream):
         headers = {}
         if "user_agent" in self.config:
             headers["User-Agent"] = self.config.get("user_agent")
-        headers["Authorization"] = f"Token {self.config.get('auth_token')}"
+        headers["Authorization"] = f"Token {self.config.get('api_token')}"
         headers["Account-Token"] = self.config.get('account_token')
         return headers
 
@@ -88,5 +87,4 @@ class fleetioStream(RESTStream):
         Yields:
             Each record from the source.
         """
-        # TODO: Parse response body and return a set of records.
         yield from extract_jsonpath(self.records_jsonpath, input=response.json())
