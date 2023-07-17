@@ -1,0 +1,28 @@
+version: 1
+send_anonymous_usage_stats: true
+project_id: tap-fleetio
+default_environment: test
+environments:
+- name: test
+plugins:
+  extractors:
+  - name: tap-fleetio
+    namespace: tap_fleetio
+    pip_url: -e .
+    capabilities:
+    - state
+    - catalog
+    - discover
+    - about
+    - stream-maps
+    settings:
+    - name: auth_token
+      kind: password
+    - name: account_token
+      kind: password
+    config:
+      start_date: '2010-01-01T00:00:00Z'
+  loaders:
+  - name: target-jsonl
+    variant: andyh1203
+    pip_url: target-jsonl
