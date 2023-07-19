@@ -7,12 +7,30 @@ from typing import Any, Callable, Iterable
 
 import requests
 from singer_sdk.helpers.jsonpath import extract_jsonpath
-from singer_sdk.pagination import BaseAPIPaginator  # noqa: TCH002
+from singer_sdk.pagination import BasePageNumberPaginator  # noqa: TCH002
 from singer_sdk.streams import RESTStream
 
 _Auth = Callable[[requests.PreparedRequest], requests.PreparedRequest]
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
+class fleetioPagination(BasePageNumberPaginator):
+    def has_more(self, response) -> bool:
+        data = response.headers
+        if (data.get('X-Pagination-Current-Page') == data.get('X-Pagination-Total-Pages') ):
+            has_more = False
+        else:
+            has_more = True
+        return has_more
+    
+    def get_next(self, response):
+        data = response.headers
+        current_page = data.get('X-Pagination-Current-Page')
+        max_page = data.get('X-Pagination-Total-Pages')
+        next_page = None
+        if (current_page < max_page):
+            next_page = int(current_page) + 1
+
+        return next_page
 
 class fleetioStream(RESTStream):
     """fleetio stream class."""
@@ -23,9 +41,6 @@ class fleetioStream(RESTStream):
         return "https://data-testing.preview.fleet.io/api"
 
     records_jsonpath = "$[*]"  # Or override `parse_response`.
-
-    # Set this value or override `get_new_paginator`.
-    next_page_token_jsonpath = "$.next_page"  # noqa: S105
 
     @property
     def http_headers(self) -> dict:
@@ -39,9 +54,10 @@ class fleetioStream(RESTStream):
             headers["User-Agent"] = self.config.get("user_agent")
         headers["Authorization"] = f"Token {self.config.get('api_token')}"
         headers["Account-Token"] = self.config.get('account_token')
+        headers["request_source"] = "fleetio_singer_tap"
         return headers
 
-    def get_new_paginator(self) -> BaseAPIPaginator:
+    def get_new_paginator(self):
         """Create a new pagination helper instance.
 
         If the source API can make use of the `next_page_token_jsonpath`
@@ -54,7 +70,8 @@ class fleetioStream(RESTStream):
         Returns:
             A pagination helper instance.
         """
-        return super().get_new_paginator()
+        
+        return fleetioPagination(1)
 
     def get_url_params(
         self,

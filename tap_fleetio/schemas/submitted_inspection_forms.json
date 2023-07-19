@@ -204,13 +204,13 @@
               "result": {
                 "properties": {
                   "file_url": {
-                    "type": "string"
+                    "type": ["null", "string"]
                   },
                   "full_file_url": {
-                    "type": "string"
+                    "type": ["null", "string"]
                   },
                   "full_signature_file_url": {
-                    "type": "string"
+                    "type": ["null", "string"]
                   },
                   "label": {
                     "type": [
