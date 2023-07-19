@@ -215,7 +215,7 @@
                 "items": {
                   "properties": {
                     "account_membership_id": {
-                      "type": "number"
+                      "type": ["null", "number"]
                     },
                     "attachment_permissions": {
                       "type": "object"
@@ -499,7 +499,7 @@
                           "type": "string"
                         },
                         "username": {
-                          "type": "string"
+                          "type": ["null", "string"]
                         },
                         "vehicles_record_set": {
                           "properties": {
@@ -513,7 +513,7 @@
                           "type": "object"
                         }
                       },
-                      "type": "object"
+                      "type": ["null", "object"]
                     },
                     "vehicle_operator": {
                       "type": "boolean"
@@ -1319,16 +1319,16 @@
                 "type": "number"
               },
               "vehicle_image_url": {
-                "type": "string"
+                "type": ["null", "string"]
               },
               "vehicle_image_url_large": {
-                "type": "string"
+                "type": ["null", "string"]
               },
               "vehicle_image_url_medium": {
-                "type": "string"
+                "type": ["null", "string"]
               },
               "vehicle_image_url_small": {
-                "type": "string"
+                "type": ["null", "string"]
               },
               "vehicle_name": {
                 "type": "string"
@@ -1474,7 +1474,7 @@
                       "items": {
                         "properties": {
                           "account_membership_id": {
-                            "type": "number"
+                            "type": ["null", "number"]
                           },
                           "attachment_permissions": {
                             "type": "object"
@@ -1623,7 +1623,7 @@
                                     "type": "number"
                                   },
                                   "name": {
-                                    "type": "string"
+                                    "type": ["null", "string"]
                                   }
                                 },
                                 "type": "object"
@@ -1635,7 +1635,7 @@
                                 "type": "string"
                               },
                               "username": {
-                                "type": "string"
+                                "type": ["null", "string"]
                               },
                               "vehicles_record_set": {
                                 "properties": {
@@ -1649,7 +1649,7 @@
                                 "type": "object"
                               }
                             },
-                            "type": "object"
+                            "type": ["null", "object"]
                           },
                           "vehicle_operator": {
                             "type": "boolean"
@@ -2219,7 +2219,7 @@
                               "type": "string"
                             },
                             "username": {
-                              "type": "string"
+                              "type": ["null", "string"]
                             },
                             "vehicles_record_set": {
                               "properties": {
