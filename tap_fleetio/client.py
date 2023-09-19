@@ -87,13 +87,14 @@ class fleetioStream(RESTStream):
         Returns:
             A dictionary of URL query parameters.
         """
-        start_replication = self.get_starting_timestamp(context)
+        start_replication = self.get_context_state(context)
+        replication_key_value = start_replication.get("starting_replication_value")
         params: dict = {}
         if next_page_token:
             params["page"] = next_page_token
-        if self.replication_key and start_replication:
+        if self.replication_key and replication_key_value:
             params["q[s]"] = f"{self.replication_key}+asc"
-            params[f"q[{self.replication_key}_gteq]"] = start_replication
+            params[f"q[{self.replication_key}_gteq]"] = replication_key_value
         return params
 
     def parse_response(self, response: requests.Response) -> Iterable[dict]:

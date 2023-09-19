@@ -34,6 +34,11 @@ class Tapfleetio(Tap):
             default="https://data-testing.preview.fleet.io/api",
             description="Fleetio API base url",
         ),
+        th.Property(
+            "start_date",
+            th.DateType,
+            description="Override incremental start date sync"
+        )
     ).to_dict()
 
     def discover_streams(self) -> list[streams.fleetioStream]:
