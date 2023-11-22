@@ -1,0 +1,139 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "properties": {
+      "approved_at": {
+        "type": ["string", "null"]
+      },
+      "approved_by": {
+        "type": ["string", "null"]
+      },
+      "comments_count": {
+        "type": ["number", "null"]
+      },
+      "created_at": {
+        "type": "string"
+      },
+      "created_by": {
+        "type": "string"
+      },
+      "custom_fields": {
+        "properties": {
+          "fet": {
+            "type": ["string", "null"]
+          },
+          "po_custom_field_date": {
+            "type": ["string", "null"]
+          }
+        },
+        "type": "object"
+      },
+      "description": {
+        "type": ["string", "null"]
+      },
+      "discount": {
+        "type": ["number", "null"]
+      },
+      "discount_percentage": {
+        "type": ["number", "null"]
+      },
+      "discount_type": {
+        "type": ["string", "null"]
+      },
+      "documents_count": {
+        "type": ["number", "null"]
+      },
+      "id": {
+        "type": "number"
+      },
+      "label_list": {
+        "items": {
+          "type": ["string", "null"]
+        },
+        "type": "array"
+      },
+      "number": {
+        "type": ["number", "null"]
+      },
+      "part_location_id": {
+        "type": ["number", "null"]
+      },
+      "part_location_name": {
+        "type": ["string", "null"]
+      },
+      "purchase_order_line_items": {
+        "items": {
+          "properties": {
+            "created_at": {
+              "type": "string"
+            },
+            "id": {
+              "type": "number"
+            },
+            "part_id": {
+              "type": "number"
+            },
+            "part_number": {
+              "type": "string"
+            },
+            "quantity": {
+              "type": "string"
+            },
+            "subtotal": {
+              "type": "number"
+            },
+            "total_quantity_received": {
+              "type": "string"
+            },
+            "unit_cost": {
+              "type": "number"
+            },
+            "updated_at": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "shipping": {
+        "type": ["number", "null"]
+      },
+      "state": {
+        "type": ["string", "null"]
+      },
+      "subtotal": {
+        "type": ["number", "null"]
+      },
+      "tax_1": {
+        "type": ["number", "null"]
+      },
+      "tax_1_percentage": {
+        "type": ["number", "null"]
+      },
+      "tax_1_type": {
+        "type": ["string", "null"]
+      },
+      "tax_2": {
+        "type": ["number", "null"]
+      },
+      "tax_2_percentage": {
+        "type": ["number", "null"]
+      },
+      "tax_2_type": {
+        "type": ["string", "null"]
+      },
+      "total_amount": {
+        "type": ["number", "null"]
+      },
+      "updated_at": {
+        "type": "string"
+      },
+      "vendor_id": {
+        "type": ["number", "null"]
+      },
+      "vendor_name": {
+        "type": ["string", "null"]
+      }
+    },
+    "type": "object"
+  }

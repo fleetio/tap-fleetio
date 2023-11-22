@@ -51,7 +51,13 @@ class Tapfleetio(Tap):
             streams.IssuesStream(self),
             streams.ServiceEntriesStream(self),
             streams.SubmittedInspectionFormsStream(self),
-            streams.VehiclesStream(self)
+            streams.VehiclesStream(self),
+            streams.ExpenseEntriesStream(self),
+            streams.ContactsStream(self),
+            streams.FuelEntriesStream(self),
+            streams.PartsStream(self),
+            streams.PurchaseOrdersStream(self),
+            streams.VehicleAssignmentsStream(self),
         ]
 
 

@@ -31,19 +31,19 @@
           ]
         },
         "closed_note": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "comments_count": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "created_at": {
-          "type": "string"
+          "type": ["string"]
         },
         "creation_type": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "description": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "documents_count": {
           "type": "number"
@@ -90,7 +90,7 @@
           "type": "boolean"
         },
         "number": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "reported_at": {
           "type": "string"
@@ -147,13 +147,13 @@
           ]
         },
         "summary": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "updated_at": {
-          "type": "string"
+          "type": ["string", "null"]
         },
         "watchers_count": {
-          "type": "number"
+          "type": ["number", "null"]
         }
     }
 }
