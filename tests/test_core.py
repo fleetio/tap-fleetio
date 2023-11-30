@@ -8,7 +8,8 @@ from tap_fleetio.tap import Tapfleetio
 
 SAMPLE_CONFIG = {
     "start_date": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d"),
-    # TODO: Initialize minimal tap config
+    "api_token": "xxx",
+    "account_token": "xxx"
 }
 
 
