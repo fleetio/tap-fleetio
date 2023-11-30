@@ -22,11 +22,11 @@ jobs:
       run: |
         pip install poetry
     - name: Install dependencies
+      env:
+        TAP_FLEETIO_API_TOKEN: ${{ secrets.TAP_FLEETIO_API_TOKEN }}
+        TAP_FLEETIO_ACCOUNT_TOKEN: ${{ secrets.TAP_FLEETIO_ACCOUNT_TOKEN }}
       run: |
         poetry install
-      env:
-        TAP_FLEETIO_API_TOKEN: {{ secrets.TAP_FLEETIO_API_TOKEN }}
-        TAP_FLEETIO_ACCOUNT_TOKEN: {{ secrets.TAP_FLEETIO_ACCOUNT_TOKEN }}
     - name: Test with pytest
       run: |
         poetry run pytest
