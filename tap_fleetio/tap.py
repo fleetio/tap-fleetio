@@ -31,7 +31,7 @@ class Tapfleetio(Tap):
         th.Property(
             "api_url",
             th.StringType,
-            default="https://data-testing.preview.fleet.io/api",
+            default="https://secure.fleetio.com/api",
             description="Fleetio API base url",
         ),
         th.Property(

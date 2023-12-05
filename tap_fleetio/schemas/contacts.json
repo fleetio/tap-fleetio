@@ -73,7 +73,7 @@
         "type": "string"
       },
       "vehicle_operator": {
-        "type": "boolean"
+        "type": ["boolean", "null"]
       }
     },
     "type": "object"
