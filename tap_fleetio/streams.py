@@ -15,6 +15,7 @@ class IssuesStream(fleetioStream):
     path = "/v2/issues"
     primary_keys = ["id"]
     api_version = "2023-03-01"
+    records_jsonpath = "$[*]"
     schema_filepath = SCHEMAS_DIR / "issues.json"  # noqa: ERA001
 
 
@@ -24,6 +25,7 @@ class ServiceEntriesStream(fleetioStream):
     path = "/v2/service_entries"
     primary_keys = ["id"]
     api_version = "2023-03-01"
+    records_jsonpath = "$[*]"
     schema_filepath = SCHEMAS_DIR / "service_entries.json"  # noqa: ERA001
 
 
@@ -33,6 +35,7 @@ class SubmittedInspectionFormsStream(fleetioStream):
     path = "/v1/submitted_inspection_forms"
     primary_keys = ["id"]
     api_version = "2023-03-01"
+    records_jsonpath = "$[*]"
     schema_filepath = SCHEMAS_DIR / "submitted_inspection_forms.json"  # noqa: ERA001
 
 
@@ -42,6 +45,7 @@ class VehiclesStream(fleetioStream):
     path = "/v1/vehicles"
     primary_keys = ["id"]
     api_version = "2024-01-01"
+    records_jsonpath = "$.records[*]"
     schema_filepath = SCHEMAS_DIR / "vehicles.json"  # noqa: ERA001
 
 
@@ -51,6 +55,7 @@ class ExpenseEntriesStream(fleetioStream):
     path = "/v1/expense_entries"
     primary_keys = ["id"]
     api_version = "2023-03-01"
+    records_jsonpath = "$[*]"
     schema_filepath = SCHEMAS_DIR / "expense_entries.json"  # noqa: ERA001
 
 
@@ -60,6 +65,7 @@ class ContactsStream(fleetioStream):
     path = "/v2/contacts"
     primary_keys = ["id"]
     api_version = "2023-03-01"
+    records_jsonpath = "$[*]"
     schema_filepath = SCHEMAS_DIR / "contacts.json"  # noqa: ERA001
 
 
@@ -69,6 +75,7 @@ class FuelEntriesStream(fleetioStream):
     path = "/v1/fuel_entries"
     primary_keys = ["id"]
     api_version = "2023-03-01"
+    records_jsonpath = "$[*]"
     schema_filepath = SCHEMAS_DIR / "fuel_entries.json"  # noqa: ERA001
 
 
@@ -78,6 +85,7 @@ class PartsStream(fleetioStream):
     path = "/v1/parts"
     primary_keys = ["id"]
     api_version = "2023-03-01"
+    records_jsonpath = "$[*]"
     schema_filepath = SCHEMAS_DIR / "parts.json"  # noqa: ERA001
 
 
@@ -87,6 +95,7 @@ class PurchaseOrdersStream(fleetioStream):
     path = "/v1/purchase_orders"
     primary_keys = ["id"]
     api_version = "2023-03-01"
+    records_jsonpath = "$[*]"
     schema_filepath = SCHEMAS_DIR / "purchase_orders.json"  # noqa: ERA001
 
 
@@ -96,4 +105,5 @@ class VehicleAssignmentsStream(fleetioStream):
     path = "/v1/vehicle_assignments"
     primary_keys = ["id"]
     api_version = "2024-01-01"
+    records_jsonpath = "$.records[*]"
     schema_filepath = SCHEMAS_DIR / "vehicle_assignments.json"  # noqa: ERA001

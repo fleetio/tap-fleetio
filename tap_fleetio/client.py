@@ -9,35 +9,51 @@ import requests
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.pagination import BasePageNumberPaginator  # noqa: TCH002
 from singer_sdk.streams import RESTStream
+import sys
 
 _Auth = Callable[[requests.PreparedRequest], requests.PreparedRequest]
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
-class fleetioPagination(BasePageNumberPaginator, RESTStream):
+class fleetioPagination(BasePageNumberPaginator):
+    """
+    Pagination for Streams using API version 2023-03-01
+    """
     def has_more(self, response) -> bool:
-        match self.api_version:
-
-            case "2023-03-01":
-                data = response.headers
-                if (data.get('X-Pagination-Current-Page') == data.get('X-Pagination-Total-Pages') ):
-                    has_more = False
-                else:
-                    has_more = True
-                return has_more
-            case "2024-01-01":
-                if (response.get('next_cursor') ) == None:
-                    has_more = False
-                else:
-                    has_more == True
+        data = response.headers
+        if (data.get('X-Pagination-Current-Page') == data.get('X-Pagination-Total-Pages') ):
+            has_more = False
+        else:
+            has_more = True
+        return has_more
     
     def get_next(self, response):
+
         data = response.headers
         current_page = data.get('X-Pagination-Current-Page')
         max_page = data.get('X-Pagination-Total-Pages')
         next_page = None
         if (current_page < max_page):
             next_page = int(current_page) + 1
+            
+        return next_page
 
+class fleetioCursorPagination(BasePageNumberPaginator):
+    """
+    Pagination for Streams using API version 2024-01-01
+    """
+    def has_more(self, response) -> bool:
+        print(response.json(), file=sys.stderr)
+        if (response.json().get('next_cursor') ) == None:
+            has_more = False
+        else:
+            has_more == True
+    
+    def get_next(self, response):
+        next_cursor = response.get("next_cursor")
+        next_page = None
+        if(next_page != None):
+            next_page = next_cursor
+            
         return next_page
 
 class fleetioStream(RESTStream):
@@ -48,7 +64,7 @@ class fleetioStream(RESTStream):
         """Return the API URL root, configurable via tap settings."""
         return "https://secure.fleetio.com/api"
 
-    records_jsonpath = "$[*]"  # Or override `parse_response`.
+    #records_jsonpath = "$[*]"  # Or override `parse_response`.
 
     @property
     def http_headers(self) -> dict:
@@ -63,6 +79,7 @@ class fleetioStream(RESTStream):
         headers["Authorization"] = f"Token {self.config.get('api_token')}"
         headers["Account-Token"] = self.config.get('account_token')
         headers["request_source"] = "fleetio_singer_tap"
+        headers["X-Api-Version"] = self.api_version
         return headers
 
     def get_new_paginator(self):
@@ -78,8 +95,10 @@ class fleetioStream(RESTStream):
         Returns:
             A pagination helper instance.
         """
-        
-        return fleetioPagination(1)
+        if self.api_version == "2023-03-01":
+            return fleetioPagination(1)
+        else:
+            return fleetioCursorPagination(None)
 
     def get_url_params(
         self,
