@@ -13,14 +13,22 @@ from singer_sdk.streams import RESTStream
 _Auth = Callable[[requests.PreparedRequest], requests.PreparedRequest]
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
-class fleetioPagination(BasePageNumberPaginator):
+class fleetioPagination(BasePageNumberPaginator, RESTStream):
     def has_more(self, response) -> bool:
-        data = response.headers
-        if (data.get('X-Pagination-Current-Page') == data.get('X-Pagination-Total-Pages') ):
-            has_more = False
-        else:
-            has_more = True
-        return has_more
+        match self.api_version:
+
+            case "2023-03-01":
+                data = response.headers
+                if (data.get('X-Pagination-Current-Page') == data.get('X-Pagination-Total-Pages') ):
+                    has_more = False
+                else:
+                    has_more = True
+                return has_more
+            case "2024-01-01":
+                if (response.get('next_cursor') ) == None:
+                    has_more = False
+                else:
+                    has_more == True
     
     def get_next(self, response):
         data = response.headers
@@ -88,13 +96,9 @@ class fleetioStream(RESTStream):
             A dictionary of URL query parameters.
         """
         start_replication = self.get_context_state(context)
-        replication_key_value = start_replication.get("starting_replication_value")
         params: dict = {}
         if next_page_token:
             params["page"] = next_page_token
-        if self.replication_key and replication_key_value:
-            params["q[s]"] = f"{self.replication_key}+asc"
-            params[f"q[{self.replication_key}_gteq]"] = replication_key_value
         return params
 
     def parse_response(self, response: requests.Response) -> Iterable[dict]:
