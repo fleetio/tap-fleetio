@@ -62,7 +62,7 @@ class fleetioStream(RESTStream):
     @property
     def url_base(self) -> str:
         """Return the API URL root, configurable via tap settings."""
-        return "https://secure.fleetio.com/api"
+        return self.config["api_url"]
 
     #records_jsonpath = "$[*]"  # Or override `parse_response`.
 
