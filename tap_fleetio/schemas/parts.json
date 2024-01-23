@@ -53,13 +53,19 @@
                   "type": "array"
                 }
               },
-              "type": ["object", "null"]
+              "type": [
+                "object",
+                "null"
+              ]
             },
             "title": {
               "type": "string"
             },
             "updated_at": {
-              "type": ["string", "null"]
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "user_full_name": {
               "type": "string"
@@ -129,7 +135,10 @@
         ]
       },
       "description": {
-        "type": ["string", "null"]
+        "type": [
+          "string",
+          "null"
+        ]
       },
       "documents": {
         "items": {
@@ -165,7 +174,10 @@
               "type": "string"
             },
             "updated_at": {
-              "type": ["string", "null"]
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "type": "object"
@@ -173,7 +185,10 @@
         "type": "array"
       },
       "documents_count": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "id": {
         "type": "number"
@@ -185,10 +200,14 @@
               "type": "string"
             },
             "file_mime_type": {
-              "type": ["string"]
+              "type": [
+                "string"
+              ]
             },
             "file_name": {
-              "type": ["string"]
+              "type": [
+                "string"
+              ]
             },
             "file_size": {
               "type": "number"
@@ -209,7 +228,10 @@
               "type": "string"
             },
             "updated_at": {
-              "type": ["string", "null"]
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "type": "object"
@@ -217,7 +239,10 @@
         "type": "array"
       },
       "images_count": {
-        "type": ["number", "null"]
+        "type": [
+          "number",
+          "null"
+        ]
       },
       "inventory_item": {
         "type": "boolean"
@@ -297,19 +322,31 @@
               ]
             },
             "created_at": {
-              "type": ["string", "null"]
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "id": {
               "type": "number"
             },
             "name": {
-              "type": ["string", "null"]
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "part_location_id": {
-              "type": ["number", "null"]
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "part_location_name": {
-              "type": ["string", "null"]
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "quantity_allocated_to_work_orders": {
               "type": [
@@ -342,7 +379,10 @@
               "type": "boolean"
             },
             "updated_at": {
-              "type": ["string", "null"]
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "type": "object"
@@ -377,7 +417,9 @@
         ]
       },
       "updated_at": {
-        "type": ["string"]
+        "type": [
+          "string"
+        ]
       }
     },
     "type": "object"
