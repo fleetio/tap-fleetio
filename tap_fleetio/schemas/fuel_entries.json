@@ -112,7 +112,7 @@
         "type": "object"
       },
       "partial": {
-        "type": ["boolean", "boolean"]
+        "type": ["boolean", "null"]
       },
       "personal": {
         "type": "boolean"
