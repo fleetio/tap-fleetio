@@ -148,7 +148,7 @@
                     },
                     "type": "object"
                   },
-                  "type": "array"
+                  "type": ["array", "null"]
                 },
                 "fail_label": {
                   "type": [
@@ -157,10 +157,10 @@
                   ]
                 },
                 "label": {
-                  "type": "string"
+                  "type": ["string", "null"]
                 },
                 "na_label": {
-                  "type": "string"
+                  "type": ["string", "null"]
                 },
                 "numeric_range_max": {
                   "type": [
@@ -262,7 +262,7 @@
               "type": "object"
             },
             "secondary_meter_entry_value": {
-              "type": "string"
+              "type": ["string", "null"]
             },
             "submitted_inspection_form_id": {
               "type": "number"

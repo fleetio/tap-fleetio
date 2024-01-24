@@ -42,16 +42,16 @@ class fleetioCursorPagination(BasePageNumberPaginator):
     Pagination for Streams using API version 2024-01-01
     """
     def has_more(self, response) -> bool:
-        print(response.json(), file=sys.stderr)
         if (response.json().get('next_cursor') ) == None:
             has_more = False
         else:
-            has_more == True
+            has_more = True
+        return has_more
     
     def get_next(self, response):
-        next_cursor = response.get("next_cursor")
+        next_cursor = response.json().get("next_cursor")
         next_page = None
-        if(next_page != None):
+        if(next_cursor != None):
             next_page = next_cursor
             
         return next_page
@@ -116,8 +116,12 @@ class fleetioStream(RESTStream):
         """
         start_replication = self.get_context_state(context)
         params: dict = {}
-        if next_page_token:
+        if next_page_token and self.api_version == '2023-03-01':
             params["page"] = next_page_token
+        elif next_page_token and self.api_version == "2024-01-01":
+            params["start_cursor"] = next_page_token
+        else:
+            pass
         return params
 
     def parse_response(self, response: requests.Response) -> Iterable[dict]:
