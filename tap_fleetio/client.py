@@ -78,7 +78,7 @@ class fleetioStream(RESTStream):
             headers["User-Agent"] = self.config.get("user_agent")
         headers["Authorization"] = f"Token {self.config.get('api_token')}"
         headers["Account-Token"] = self.config.get('account_token')
-        headers["request_source"] = "fleetio_singer_tap"
+        headers["X-Api-Client"] = "fleetio_singer_tap"
         headers["X-Api-Version"] = self.api_version
         return headers
 
