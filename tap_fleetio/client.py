@@ -62,7 +62,7 @@ class fleetioStream(RESTStream):
     @property
     def url_base(self) -> str:
         """Return the API URL root, configurable via tap settings."""
-        return "https://demo.fleetio.com/api"
+        return "https://secure.fleetio.com/api"
 
     #records_jsonpath = "$[*]"  # Or override `parse_response`.
 
@@ -96,8 +96,8 @@ class fleetioStream(RESTStream):
         Returns:
             A pagination helper instance.
         """
-        if self.api_version == "2023-03-01":
-            return fleetioPagination(1)
+        if self.api_version == "2024-01-01":
+            return fleetioCursorPagination(None)
         else:
             return fleetioCursorPagination(None)
 
@@ -117,12 +117,13 @@ class fleetioStream(RESTStream):
         """
         start_replication = self.get_context_state(context)
         params: dict = {}
-        if next_page_token and self.api_version == '2023-03-01':
-            params["page"] = next_page_token
-        elif next_page_token and self.api_version == "2024-01-01":
+        if next_page_token and self.api_version == '2024-01-01':
+            params["start_cursor"] = next_page_token
+        elif next_page_token and self.api_version == "2024-03-15":
             params["start_cursor"] = next_page_token
         else:
             pass
+        params["per_page"] = 100
         return params
 
     def parse_response(self, response: requests.Response) -> Iterable[dict]:

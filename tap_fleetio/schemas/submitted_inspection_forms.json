@@ -285,7 +285,7 @@
         ]
       },
       "user": {
-        "type": "string"
+        "type": ["string", "object"]
       },
       "vehicle_id": {
         "type": "number"
