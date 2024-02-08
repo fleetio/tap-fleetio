@@ -197,6 +197,12 @@
           "string"
         ]
       },
+      "fees_cents": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
       "discount_type": {
         "type": "string"
       },

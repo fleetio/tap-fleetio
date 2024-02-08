@@ -289,6 +289,12 @@
       },
       "vehicle_id": {
         "type": "number"
+      },
+      "vehicle": {
+        "type": [
+          "object",
+          "null"
+        ]
       }
     }
 }
