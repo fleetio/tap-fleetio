@@ -14,32 +14,9 @@ import sys
 _Auth = Callable[[requests.PreparedRequest], requests.PreparedRequest]
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
-class fleetioPagination(BasePageNumberPaginator):
-    """
-    Pagination for Streams using API version 2023-03-01
-    """
-    def has_more(self, response) -> bool:
-        data = response.headers
-        if (data.get('X-Pagination-Current-Page') == data.get('X-Pagination-Total-Pages') ):
-            has_more = False
-        else:
-            has_more = True
-        return has_more
-    
-    def get_next(self, response):
-
-        data = response.headers
-        current_page = data.get('X-Pagination-Current-Page')
-        max_page = data.get('X-Pagination-Total-Pages')
-        next_page = None
-        if (current_page < max_page):
-            next_page = int(current_page) + 1
-            
-        return next_page
-
 class fleetioCursorPagination(BasePageNumberPaginator):
     """
-    Pagination for Streams using API version 2024-01-01
+    Pagination for Streams supporting cursor based pagination
     """
     def has_more(self, response) -> bool:
         if (response.json().get('next_cursor') ) == None:
@@ -96,10 +73,7 @@ class fleetioStream(RESTStream):
         Returns:
             A pagination helper instance.
         """
-        if self.api_version == "2024-01-01":
-            return fleetioCursorPagination(None)
-        else:
-            return fleetioCursorPagination(None)
+        return fleetioCursorPagination(None)
 
     def get_url_params(
         self,
@@ -117,12 +91,8 @@ class fleetioStream(RESTStream):
         """
         start_replication = self.get_context_state(context)
         params: dict = {}
-        if next_page_token and self.api_version == '2024-01-01':
+        if next_page_token and self.api_version == "2024-03-15":
             params["start_cursor"] = next_page_token
-        elif next_page_token and self.api_version == "2024-03-15":
-            params["start_cursor"] = next_page_token
-        else:
-            pass
         params["per_page"] = 100
         return params
 
