@@ -33,11 +33,6 @@ class Tapfleetio(Tap):
             th.StringType,
             default="https://secure.fleetio.com/api",
             description="Fleetio API base url",
-        ),
-        th.Property(
-            "start_date",
-            th.DateType,
-            description="Override incremental start date sync"
         )
     ).to_dict()
 

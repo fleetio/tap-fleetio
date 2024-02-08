@@ -8,7 +8,6 @@ from singer_sdk.testing import get_tap_test_class
 from tap_fleetio.tap import Tapfleetio
 
 SAMPLE_CONFIG = {
-    "start_date": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d"),
     "api_token": os.environ.get("TAP_FLEETIO_API_TOKEN"),
     "account_token": os.environ.get("TAP_FLEETIO_ACCOUNT_TOKEN")
 }
