@@ -28,7 +28,7 @@ class fleetioCursorPagination(BasePageNumberPaginator):
     def get_next(self, response):
         next_cursor = response.json().get("next_cursor")
         next_page = None
-        if(next_cursor != None):
+        if(next_cursor is not None):
             next_page = next_cursor
             
         return next_page
