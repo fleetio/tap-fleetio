@@ -1,42 +1,43 @@
 # tap-fleetio
 
-`tap-fleetio` is a Singer tap for fleetio.
+`tap-fleetio` is a Singer tap for [Fleetio](https://fleetio.com).
 
 Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
 
-<!--
-
-Developer TODO: Update the below as needed to correctly describe the install procedure. For instance, if you do not have a PyPi repo, or if you want users to directly install from your git repo, you can modify this step as appropriate.
-
 ## Installation
-
-Install from PyPi:
-
-```bash
-pipx install tap-fleetio
-```
 
 Install from GitHub:
 
 ```bash
-pipx install git+https://github.com/ORG_NAME/tap-fleetio.git@main
+pipx install git+https://github.com/fleetio/tap-fleetio.git@main
 ```
-
--->
 
 ## Configuration
 
 ### Accepted Config Options
 
-<!--
-Developer TODO: Provide a list of config options accepted by the tap.
+## Capabilities
 
-This section can be created by copy-pasting the CLI output from:
+* `catalog`
+* `state`
+* `discover`
+* `about`
+* `stream-maps`
+* `schema-flattening`
+* `batch`
 
-```
-tap-fleetio --about --format=markdown
-```
--->
+## Settings
+
+| Setting             | Required | Default | Description |
+|:--------------------|:--------:|:-------:|:------------|
+| api_token           | True     | None    | The token to authenticate against the Fleetio API |
+| account_token       | True     | None    | Account Token |
+| api_url             | False    | https://secure.fleetio.com/api | Fleetio API base url |
+| stream_maps         | False    | None    | Config object for stream maps capability. For more information check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html). |
+| stream_map_config   | False    | None    | User-defined config values to be used within map expressions. |
+| flattening_enabled  | False    | None    | 'True' to enable schema flattening and automatically expand nested properties. |
+| flattening_max_depth| False    | None    | The max depth to flatten schemas. |
+| batch_config        | False    | None    |             |
 
 A full list of supported settings and capabilities for this
 tap is available by running:
@@ -52,10 +53,6 @@ This Singer tap will automatically import any environment variables within the w
 environment variable is set either in the terminal context or in the `.env` file.
 
 ### Source Authentication and Authorization
-
-<!--
-Developer TODO: If your tap requires special access on the source system, or any special authentication requirements, provide those here.
--->
 
 ## Usage
 
@@ -124,6 +121,9 @@ meltano invoke tap-fleetio --version
 # OR run a test `elt` pipeline:
 meltano elt tap-fleetio target-jsonl
 ```
+
+### Fleetio API Docs
+Further documentation about the Fleetio API can be found [here](https://developer.fleetio.com)
 
 ### SDK Dev Guide
 
