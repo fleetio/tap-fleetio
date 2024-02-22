@@ -31,9 +31,9 @@ class Tapfleetio(Tap):
         th.Property(
             "api_url",
             th.StringType,
-            default="https://data-testing.preview.fleet.io/api",
+            default="https://secure.fleetio.com/api",
             description="Fleetio API base url",
-        ),
+        )
     ).to_dict()
 
     def discover_streams(self) -> list[streams.fleetioStream]:
@@ -46,7 +46,13 @@ class Tapfleetio(Tap):
             streams.IssuesStream(self),
             streams.ServiceEntriesStream(self),
             streams.SubmittedInspectionFormsStream(self),
-            streams.VehiclesStream(self)
+            streams.VehiclesStream(self),
+            streams.ExpenseEntriesStream(self),
+            streams.ContactsStream(self),
+            streams.FuelEntriesStream(self),
+            streams.PartsStream(self),
+            streams.PurchaseOrdersStream(self),
+            streams.VehicleAssignmentsStream(self),
         ]
 
 

@@ -13,23 +13,23 @@ from singer_sdk.streams import RESTStream
 _Auth = Callable[[requests.PreparedRequest], requests.PreparedRequest]
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
-class fleetioPagination(BasePageNumberPaginator):
+class fleetioCursorPagination(BasePageNumberPaginator):
+    """
+    Pagination for Streams supporting cursor based pagination
+    """
     def has_more(self, response) -> bool:
-        data = response.headers
-        if (data.get('X-Pagination-Current-Page') == data.get('X-Pagination-Total-Pages') ):
+        if (response.json().get('next_cursor') ) == None:
             has_more = False
         else:
             has_more = True
         return has_more
     
     def get_next(self, response):
-        data = response.headers
-        current_page = data.get('X-Pagination-Current-Page')
-        max_page = data.get('X-Pagination-Total-Pages')
+        next_cursor = response.json().get("next_cursor")
         next_page = None
-        if (current_page < max_page):
-            next_page = int(current_page) + 1
-
+        if(next_cursor is not None):
+            next_page = next_cursor
+            
         return next_page
 
 class fleetioStream(RESTStream):
@@ -38,9 +38,9 @@ class fleetioStream(RESTStream):
     @property
     def url_base(self) -> str:
         """Return the API URL root, configurable via tap settings."""
-        return "https://data-testing.preview.fleet.io/api"
+        return "https://secure.fleetio.com/api"
 
-    records_jsonpath = "$[*]"  # Or override `parse_response`.
+    #records_jsonpath = "$[*]"  # Or override `parse_response`.
 
     @property
     def http_headers(self) -> dict:
@@ -54,7 +54,9 @@ class fleetioStream(RESTStream):
             headers["User-Agent"] = self.config.get("user_agent")
         headers["Authorization"] = f"Token {self.config.get('api_token')}"
         headers["Account-Token"] = self.config.get('account_token')
-        headers["request_source"] = "fleetio_singer_tap"
+        headers["X-Client-Name"] = "data_connector"
+        headers["X-Client-Platform"] = "fleetio_singer_tap"
+        headers["X-Api-Version"] = self.api_version
         return headers
 
     def get_new_paginator(self):
@@ -70,8 +72,7 @@ class fleetioStream(RESTStream):
         Returns:
             A pagination helper instance.
         """
-        
-        return fleetioPagination(1)
+        return fleetioCursorPagination(None)
 
     def get_url_params(
         self,
@@ -87,12 +88,11 @@ class fleetioStream(RESTStream):
         Returns:
             A dictionary of URL query parameters.
         """
+        start_replication = self.get_context_state(context)
         params: dict = {}
-        if next_page_token:
-            params["page"] = next_page_token
-        if self.replication_key:
-            params["sort"] = "asc"
-            params["order_by"] = self.replication_key
+        if next_page_token and self.api_version == "2024-03-15":
+            params["start_cursor"] = next_page_token
+        params["per_page"] = 100
         return params
 
     def parse_response(self, response: requests.Response) -> Iterable[dict]:

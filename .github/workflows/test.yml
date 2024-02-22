@@ -1,9 +1,12 @@
 ### A CI workflow template that runs linting and python testing
-### TODO: Modify as needed or as desired.
 
 name: Test tap-fleetio
 
 on: [push]
+
+env:
+  TAP_FLEETIO_API_TOKEN: ${{ secrets.TAP_FLEETIO_API_TOKEN }}
+  TAP_FLEETIO_ACCOUNT_TOKEN: ${{ secrets.TAP_FLEETIO_ACCOUNT_TOKEN }}
 
 jobs:
   pytest:
@@ -12,7 +15,7 @@ jobs:
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     strategy:
       matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+        python-version: ["3.10", "3.11"]
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
