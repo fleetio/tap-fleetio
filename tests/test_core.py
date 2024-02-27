@@ -8,7 +8,7 @@ from singer_sdk.testing import get_tap_test_class, SuiteConfig
 from tap_fleetio.tap import Tapfleetio
 
 SAMPLE_CONFIG = {
-    "api_token": os.environ.get("TAP_FLEETIO_API_TOKEN"),
+    "api_key": os.environ.get("TAP_FLEETIO_API_KEY"),
     "account_token": os.environ.get("TAP_FLEETIO_ACCOUNT_TOKEN")
 }
 

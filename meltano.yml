@@ -16,7 +16,7 @@ plugins:
     - about
     - stream-maps
     settings:
-    - name: api_token
+    - name: api_key
       kind: password
     - name: account_token
       kind: password
