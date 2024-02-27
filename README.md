@@ -30,7 +30,7 @@ pipx install git+https://github.com/fleetio/tap-fleetio.git@main
 
 | Setting             | Required | Default | Description |
 |:--------------------|:--------:|:-------:|:------------|
-| api_token           | True     | None    | The token to authenticate against the Fleetio API |
+| api_key             | True     | None    | The key to authenticate against the Fleetio API |
 | account_token       | True     | None    | Account Token |
 | api_url             | False    | https://secure.fleetio.com/api | Fleetio API base url |
 | stream_maps         | False    | None    | Config object for stream maps capability. For more information check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html). |

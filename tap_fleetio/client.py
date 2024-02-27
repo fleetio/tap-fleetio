@@ -52,7 +52,7 @@ class fleetioStream(RESTStream):
         headers = {}
         if "user_agent" in self.config:
             headers["User-Agent"] = self.config.get("user_agent")
-        headers["Authorization"] = f"Token {self.config.get('api_token')}"
+        headers["Authorization"] = f"Token {self.config.get('api_key')}"
         headers["Account-Token"] = self.config.get('account_token')
         headers["X-Client-Name"] = "data_connector"
         headers["X-Client-Platform"] = "fleetio_singer_tap"

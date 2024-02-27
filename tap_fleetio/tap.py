@@ -15,11 +15,11 @@ class Tapfleetio(Tap):
 
     config_jsonschema = th.PropertiesList(
         th.Property(
-            "api_token",
+            "api_key",
             th.StringType,
             required=True,
             secret=True,  # Flag config as protected.
-            description="The token to authenticate against the Fleetio API",
+            description="The key to authenticate against the Fleetio API",
         ),
         th.Property(
             "account_token",

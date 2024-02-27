@@ -5,7 +5,7 @@ name: Test tap-fleetio
 on: [push]
 
 env:
-  TAP_FLEETIO_API_TOKEN: ${{ secrets.TAP_FLEETIO_API_TOKEN }}
+  TAP_FLEETIO_API_KEY: ${{ secrets.TAP_FLEETIO_API_KEY }}
   TAP_FLEETIO_ACCOUNT_TOKEN: ${{ secrets.TAP_FLEETIO_ACCOUNT_TOKEN }}
 
 jobs:
