@@ -18,18 +18,18 @@ class fleetioCursorPagination(BasePageNumberPaginator):
     Pagination for Streams supporting cursor based pagination
     """
     def has_more(self, response) -> bool:
-        if (response.json().get('next_cursor') ) == None:
+        if (response.json().get('next_cursor') ) is None:
             has_more = False
         else:
             has_more = True
         return has_more
-    
+
     def get_next(self, response):
         next_cursor = response.json().get("next_cursor")
         next_page = None
-        if(next_cursor is not None):
+        if next_cursor is not None:
             next_page = next_cursor
-            
+
         return next_page
 
 class fleetioStream(RESTStream):
@@ -88,7 +88,6 @@ class fleetioStream(RESTStream):
         Returns:
             A dictionary of URL query parameters.
         """
-        start_replication = self.get_context_state(context)
         params: dict = {}
         if next_page_token and self.api_version == "2024-03-15":
             params["start_cursor"] = next_page_token
