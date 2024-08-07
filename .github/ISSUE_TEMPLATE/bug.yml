@@ -1,0 +1,44 @@
+name: Bug
+description: File a Bug
+title: "[Bug]: "
+labels: ["bug"]
+assignees:
+  - jmmizerany
+body:
+  - type: textarea
+    id: request_input
+    attributes:
+      label: Bug Details
+      description: What is not working? Please be sure to include screenshots if possible
+    validations:
+      required: true
+  - type: input
+    id: version_input
+    attributes:
+      label: Version
+      description: What version are you using? (you can find this on the releases tab)
+    validations:
+      required: true
+  - type: dropdown
+    id: contribute_input
+    attributes:
+      label: Is this an issue related to a forked contribution?
+      options:
+        - 'yes'
+        - 'no'
+      default: 1
+    validations:
+      required: true
+  - type: dropdown
+    id: severity_input
+    attributes:
+      label: Severity
+      description: Please select a number 1-5 (1 being low and 5 being high)
+      options:
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        - '5'
+    validations:
+      required: true
