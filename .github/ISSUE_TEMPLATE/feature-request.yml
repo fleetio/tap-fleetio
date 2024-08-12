@@ -1,0 +1,31 @@
+name: Feature Request
+description: File a Feature Request
+title: "[Feature Request]: "
+labels: ["enhancement"]
+assignees:
+  - jmmizerany
+body:
+  - type: textarea
+    id: request_input
+    attributes:
+      label: Request Details
+      description: What would you like to see added or changed?
+    validations:
+      required: true
+  - type: input
+    id: version_input
+    attributes:
+      label: Version
+      description: What version are you using? (you can find this on the releases tab)
+    validations:
+      required: true
+  - type: dropdown
+    id: contribute_input
+    attributes:
+      label: Is this an issue related to a forked contribution?
+      options:
+        - 'yes'
+        - 'no'
+      default: 1
+    validations:
+      required: true
