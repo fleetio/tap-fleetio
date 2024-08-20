@@ -1,7 +1,6 @@
 """Tests standard tap features using the built-in SDK tests library."""
 
 import os
-import datetime
 
 from singer_sdk.testing import get_tap_test_class, SuiteConfig
 
