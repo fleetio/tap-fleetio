@@ -34,13 +34,13 @@
       "starting_latitude": {
         "type": [
           "null",
-          "number"
+          "string"
         ]
       },
       "starting_longitude": {
         "type": [
           "null",
-          "number"
+          "string"
         ]
       },
       "submitted_at": {
@@ -49,13 +49,13 @@
       "submitted_latitude": {
         "type": [
           "null",
-          "number"
+          "string"
         ]
       },
       "submitted_longitude": {
         "type": [
           "null",
-          "number"
+          "string"
         ]
       },
       "user": {
