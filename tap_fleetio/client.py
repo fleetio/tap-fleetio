@@ -89,7 +89,7 @@ class fleetioStream(RESTStream):
             A dictionary of URL query parameters.
         """
         params: dict = {}
-        if next_page_token and self.api_version == "2024-03-15":
+        if next_page_token:
             params["start_cursor"] = next_page_token
         params["per_page"] = 100
         return params
